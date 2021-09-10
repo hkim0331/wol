@@ -1,0 +1,24 @@
+{"label"
+ {:name "pc1.local"
+  :mac  "aa:bb:cc:dd:ee:ff"
+  :off  "sudo systemctl hibernate"}
+
+ "my"
+ {:name "pc2.local"
+  :mac  "bb:bb:cc:dd:ee:ff"
+  :off  "sudo systemctl suspend"}
+
+ "love"
+ {:name "pc3.local"
+  :mac  "cc:bb:cc:dd:ee:ff"
+  :off  "sudo shutdown -h now"}
+
+ "m1"
+ {:name "mac1.local"
+  :mac  "dd:bb:cc:dd:ee:ff"
+  :off  "osascript -e 'tell application \"Finder\" to sleep'"}
+
+ "m2"
+ {:name "mac2.local"
+  :mac  "ee:bb:cc:dd:ee:ff"
+  :off  "osascript -e 'tell application \"Finder\" to sleep'"}}
