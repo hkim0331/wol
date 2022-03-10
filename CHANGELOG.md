@@ -6,6 +6,10 @@ wakeonlan wapper.
 * labels are necessary?
 * downs/ups
 * status-all
+* update wol.edn from result of `arp -a`
+
+## 0.2.2 - 2022-03-10
+* up,down
 
 ## 0.2.1 - 2021-09-09
 ### Github repository
