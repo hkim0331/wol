@@ -1,0 +1,13 @@
+{:path ["src"]
+
+ :min-version "0.4.0"
+
+ :tasks
+ {install
+  (let [bin (str (System/getenv "HOME") "/bin/wol")
+        config (str (System/getenv "HOME") "/.config/wol/wol.edn")]
+    (shell (str "cp src/wol.clj " bin))
+    (shell (str "chmod 0700 " bin))
+    (shell (str "cp resources/wol.edn " config)))
+  }
+}

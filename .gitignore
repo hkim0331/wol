@@ -1,0 +1,4 @@
+.calva/output-window/
+.clj-kondo/.cache/
+.lsp/.cache/
+resources/wol.edn
