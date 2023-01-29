@@ -11,7 +11,7 @@
 ;;; 2023-01-28 update
 (require '[clojure.edn :as edn])
 
-(def ^:private version "0.4.0")
+(def ^:private version "0.4.2")
 
 (defn- usage [verb]
   (println "unknown verb:" verb)
