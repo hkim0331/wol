@@ -3,6 +3,9 @@
 ## Unreleased
 * how to hyperfiddle/rcf in babashka?
 
+## 0.4.2 - 2023-01-29
+* added bump-version.sh
+
 ## 0.4.1 - 2023-01-29
 * recreated github repository
 
