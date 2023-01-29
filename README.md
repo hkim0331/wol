@@ -3,6 +3,7 @@
 wake on/off hosts listed in wol.edn.
 
 ## Required
+- wakeonlan
 - babashka
 - ssh
 
@@ -12,4 +13,4 @@ wake on/off hosts listed in wol.edn.
 
 ## License
 
-Copyright © 2022 Hiroshi Kimura
+Copyright © 2022, 2023 Hiroshi Kimura

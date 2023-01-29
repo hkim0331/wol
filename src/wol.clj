@@ -11,9 +11,10 @@
 ;;; 2023-01-28 update
 (require '[clojure.edn :as edn])
 
-(def ^:private version "0.3.0")
+(def ^:private version "0.4.0")
 
-(defn- usage []
+(defn- usage [verb]
+  (println "unknown verb:" verb)
   (println "usage: wol [on|off|status] host1 host2 ...")
   (println "       wol [list|help|version]"))
 
@@ -72,13 +73,16 @@
         (recur (ping? host))))))
 
 (defn- up [host]
-  (if (ping? host)
+  ;; (println host)
+  (if (boolean (re-find #"on" (ping? host)))
     "already on"
     (and
      (shell/sh "wakeonlan" (find-mac host))
-     (wakeup? name))))
+     (wakeup? host))))
 
 (comment
+  (boolean (re-find #"on" (ping? "nic")))
+  (ping? "nuc")
   (up "nuc")
   :rcf)
 
@@ -95,15 +99,18 @@
   :rcf)
 
 ;; FIXME, up/on, down/off
-(let [[verb & hosts] *command-line-args*]
+(defn -main [& _args]
+ (let [[verb & hosts] *command-line-args*]
   ;; (println "verb:" verb "hosts:" hosts)
-  (case verb
-    "configs" (println configs) ;; edn?
-    "list"    (println (keys configs)) ;; sorted?
-    "version" (println version)
-    "status"  (mapv #(-> % ping? println) hosts)
-    "up"      (doall (pmap up hosts))
-    "on"      (doall (pmap up hosts))
-    "down"    (doall (pmap down hosts))
-    "off"     (doall (pmap down hosts))
-    (usage)))
+   (case verb
+     "configs" (println configs) ;; edn?
+     "list"    (println (keys configs)) ;; sorted?
+     "version" (println version)
+     "status"  (mapv #(-> % ping? println) hosts)
+     "up"      (doall (pmap up hosts))
+     "down"    (doall (pmap down hosts))
+     "on"      (doall (pmap up hosts))
+     "off"     (doall (pmap down hosts))
+     (usage verb))))
+
+(-main)
