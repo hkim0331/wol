@@ -1,0 +1,5 @@
+{"label"
+ {:name "FQDN"
+  :mac  "MAC address"
+  :off  "shutdown script which will be executed via `ssh`"}
+}
