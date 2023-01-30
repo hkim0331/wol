@@ -1,7 +1,12 @@
 # ChangeLog
 
 ## Unreleased
-* how to hyperfiddle/rcf in babashka?
+- how to hyperfiddle/rcf in babashka?
+
+
+## 0.4.3-SNAPSHOT
+- fix typo: :min-bb-version is correct
+
 
 ## 0.4.2 - 2023-01-29
 * added bump-version.sh
