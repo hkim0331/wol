@@ -9,9 +9,14 @@
 ;;; 2022-03-11 did not reflect git. do it again.
 ;;; 2023-01-24 pmac requires `doall`.
 ;;; 2023-01-28 update
-(require '[clojure.edn :as edn])
+(require
+ '[babashka.process :refer [shell]]
+ '[clojure.edn :as edn])
 
-(def ^:private version "0.4.2")
+(comment
+  (slurp (:out (shell "ls -l")))
+  )
+(def ^:private version "0.5.0")
 
 (defn- usage [verb]
   (println "unknown verb:" verb)
@@ -49,16 +54,16 @@
   ([host count] (ping? host count 1))
   ([host count timeout]
    (str host
-        (if (= 0 (:exit (shell/sh "ping" host
+        (if (= 0 (:exit (shell "ping" host
                             "-c"  (str count)
                             "-t"  (str timeout))))
           ": on"
           ": off"))))
 (comment
-  (shell/sh "ping" "syno2" "-c" "2" "-t" "2")
+  (shell "ping" "syno2" "-c" "2" "-t" "2")
   (ping? "syno2")
   (ping? "nuc.local")
-  (shell/sh "ping syno2")
+  (shell "ping syno2")
   )
 
 (defn- wakeup?
@@ -77,7 +82,7 @@
   (if (boolean (re-find #"on" (ping? host)))
     "already on"
     (and
-     (shell/sh "wakeonlan" (find-mac host))
+     (shell "wakeonlan" (find-mac host))
      (wakeup? host))))
 
 (comment
@@ -88,7 +93,7 @@
 
 (defn- down [host]
   (if (boolean (re-find #"on" (ping? host)))
-    (shell/sh "ssh" host (find-off host))
+    (shell "ssh" host (find-off host))
     "sleeping"))
 
 (comment
@@ -113,4 +118,4 @@
      "off"     (doall (pmap down hosts))
      (usage verb))))
 
-(-main)
+;; (-main)
