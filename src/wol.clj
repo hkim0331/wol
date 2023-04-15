@@ -9,6 +9,8 @@
 ;;; 2022-03-11 did not reflect git. do it again.
 ;;; 2023-01-24 pmac requires `doall`.
 ;;; 2023-01-28 update
+(comment
+  :rcf)
 (require '[clojure.edn :as edn])
 
 (def ^:private version "0.4.2")
@@ -55,6 +57,7 @@
           ": on"
           ": off"))))
 (comment
+  (:out (shell/sh "ls" "-l"))
   (shell/sh "ping" "syno2" "-c" "2" "-t" "2")
   (ping? "syno2")
   (ping? "nuc.local")
