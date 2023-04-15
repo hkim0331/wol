@@ -10,12 +10,15 @@
 ;;; 2023-01-24 pmac requires `doall`.
 ;;; 2023-01-28 update
 (require
- '[babashka.process :refer [shell]]
+ '[babashka.process :refer [shell process exec]]
  '[clojure.edn :as edn])
 
 (comment
-  (slurp (:out (shell "ls -l")))
-  )
+  (slurp (:out (shell {:dir "/"} "ls")))
+  (slurp (:out (shell {:dir "/"} "ls -l")))
+  (slurp (:out (shell "uptime")))
+  :rcf)
+
 (def ^:private version "0.5.0")
 
 (defn- usage [verb]
