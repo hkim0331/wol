@@ -13,4 +13,4 @@ wake on/off hosts listed in wol.edn.
 
 ## License
 
-Copyright © 2022, 2023 Hiroshi Kimura
+Copyright © 2021-2023 Hiroshi Kimura

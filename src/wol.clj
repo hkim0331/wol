@@ -9,9 +9,12 @@
 ;;; 2022-03-11 did not reflect git. do it again.
 ;;; 2023-01-24 pmac requires `doall`.
 ;;; 2023-01-28 update
-(require '[clojure.edn :as edn])
 
-(def ^:private version "0.4.2")
+(require
+ '[babashka.process :refer [sh]]
+ '[clojure.edn :as edn])
+
+(def ^:private version "0.5.0")
 
 (defn- usage [verb]
   (println "unknown verb:" verb)
@@ -33,10 +36,6 @@
   (-> (configs host)
       :mac))
 
-(comment
-  (find-mac "nuc")
-  :rcf)
-
 (defn- find-off
   [host]
   (-> (configs host)
@@ -49,16 +48,22 @@
   ([host count] (ping? host count 1))
   ([host count timeout]
    (str host
-        (if (= 0 (:exit (shell/sh "ping" host
+        (if (= 0 (:exit (sh "ping" host
                             "-c"  (str count)
                             "-t"  (str timeout))))
           ": on"
           ": off"))))
+
 (comment
+<<<<<<< HEAD
+  (:out (shell/sh "ls" "-l"))
   (shell/sh "ping" "syno2" "-c" "2" "-t" "2")
+=======
+  (sh "ping" "syno2" "-c" "2" "-t" "2")q
+  (sh "ping syno2")
+>>>>>>> feature/shutdown
   (ping? "syno2")
   (ping? "nuc.local")
-  (shell/sh "ping syno2")
   )
 
 (defn- wakeup?
@@ -77,7 +82,7 @@
   (if (boolean (re-find #"on" (ping? host)))
     "already on"
     (and
-     (shell/sh "wakeonlan" (find-mac host))
+     (sh "wakeonlan" (find-mac host))
      (wakeup? host))))
 
 (comment
@@ -86,10 +91,17 @@
   (up "nuc")
   :rcf)
 
-(defn- down [host]
+;; FIXME: ssh do not return
+(defn- down
+  "shutdown host."
+  [host]
   (if (boolean (re-find #"on" (ping? host)))
-    (shell/sh "ssh" host (find-off host))
-    "sleeping"))
+    (do
+      (println "down" host "...")
+      (sh "ssh" host (find-off host)))
+    (do
+      (println host "is sleelping")
+      "sleeping")))
 
 (comment
   (ping? "nuc")
