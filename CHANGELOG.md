@@ -5,6 +5,9 @@
 * ping returns, but can not ssh.
 - how to hyperfiddle/rcf in babashka?
 
+## 0.5.0
+### Changed
+- from clojure.java.shell to babashka.process
 
 ## 0.4.3-SNAPSHOT
 - fix typo: :min-bb-version is correct
