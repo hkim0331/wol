@@ -9,12 +9,6 @@
 ;;; 2022-03-11 did not reflect git. do it again.
 ;;; 2023-01-24 pmac requires `doall`.
 ;;; 2023-01-28 update
-<<<<<<< HEAD
-(comment
-  :rcf)
-(require '[clojure.edn :as edn])
-=======
->>>>>>> feature/shutdown
 
 (require
  '[babashka.process :refer [sh]]
