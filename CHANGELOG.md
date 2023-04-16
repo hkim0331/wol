@@ -1,17 +1,19 @@
 # ChangeLog
 
 ## Unreleased
-* how to hyperfiddle/rcf in babashka?
-* ping returns, but can not ssh.
 - how to hyperfiddle/rcf in babashka?
+- ping returns, but can not ssh.
+ how to hyperfiddle/rcf in babashka?
+- waiting ping no-return when shutdown
+
 
 ## 0.5.0
 ### Changed
 - from clojure.java.shell to babashka.process
+  clojure.java.shell/sh == babashka.process/sh, not shell.
 
 ## 0.4.3-SNAPSHOT
 - fix typo: :min-bb-version is correct
-
 
 ## 0.4.2 - 2023-01-29
 - added bump-version.sh
